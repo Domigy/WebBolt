@@ -12,3 +12,13 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Termekek{
+  id Int @id @default(autoincrement())
+  name String
+  imgUrl String
+  model String
+  type String
+  vrmp String  
+  price Int
+}

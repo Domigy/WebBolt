@@ -62,7 +62,7 @@ export default function Kezdolap() {
         <div className="row">
         {termekek.map((termek) =>(
             
-  <div className="col-sm-6">
+  <div className="col-sm-3">
 
 <div className="card" >
 <img className="card-img-top" width={250} height={250}  src={termek.imgUrl} alt={termek.name}></img>

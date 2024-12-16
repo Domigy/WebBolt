@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Kezdolap from './components/Tabletek/Kezdolap';
+import Kezdolap from './components/Termekek/Kezdolap';
 
 const router = createBrowserRouter([
   {

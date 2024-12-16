@@ -6,6 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Kezdolap from './components/Termekek/Kezdolap';
+import Login from './components/Termekek/Login'
+import Regisztracio from './components/Termekek/Regisztracio';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
     path: "/kezdolap",
     element: < Kezdolap/>,
   },
+  {
+    path: "/login",
+    element: <Login/>
+  },
+  {
+    path: "/registation",
+    element: <Regisztracio/>
+  }
 ]);
 
 

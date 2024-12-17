@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import Menu from "../Menu";
-
+import { useAuth } from "../context/Contexts"; 
+import { useCart } from "../context/CartContext";
 
 interface Termek {
     id: number;
@@ -17,8 +18,10 @@ interface Termek {
 
 export default function Kezdolap() {
 
+    const { addToCart } = useCart();
     const [termekek, setTermekek] = useState<Termek[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const {success} = useAuth();
     const [error, setError] = useState(null);
     const [errorServer, setErrorServer] = useState<string>("");
     
@@ -76,10 +79,16 @@ export default function Kezdolap() {
   <li className="list-group-item"><h6>{termek.price} Ft</h6></li>
   
 </ul>
-<div className="card-body">
-  <a href="#" className="card-link">Card link</a>
-  <a href="#" className="card-link">Another link</a>
-</div>
+{success && (
+  <div className="card-body">
+    <button
+                  className="btn btn-primary"
+                  onClick={() => addToCart(termek)}
+                >
+                  Kosárba
+                </button>
+  </div>
+)}
 </div>
 </div>
 

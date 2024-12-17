@@ -53,8 +53,16 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const hashedPw = await argon2.hash(updateUserDto.password);
+    const updateUser = await this.db.user.update({where: {id},
+      data: {
+        ...updateUserDto,
+        password:hashedPw,
+      }
+    });
+    delete updateUser.password;
+    return updateUser;
   }
 
   remove(id: number) {

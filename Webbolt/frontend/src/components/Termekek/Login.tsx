@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
+import { useAuth } from "../context/Contexts";
 
 export default function Login(){
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
+    const navigate = useNavigate();
+    
 
-    const [success, setSuccess] = useState<boolean>(false);
+    const { success, setSuccess, setUser } = useAuth();
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -37,7 +40,17 @@ export default function Login(){
                 console.log(msg.message);
                 throw new Error(`${msg.message}`);
             }
+            
             setSuccess(true);
+            const msg = await response.json();
+            //console.log(msg.userId);
+            
+             setUser({
+                id: msg.userId,
+                username: newUser.username,
+                email: newUser.email
+            });
+            navigate("/kezdolap")
             
             setUsername('');
             setEmail('');

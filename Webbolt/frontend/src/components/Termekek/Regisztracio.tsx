@@ -25,7 +25,7 @@ export default function Regisztracio(){
            location: location,
            password: password
         }
-        console.log(newUser);
+        //console.log(newUser);
         try {
             const response = await fetch('http://localhost:3000/users', {
                 method: 'POST',
@@ -35,7 +35,9 @@ export default function Regisztracio(){
                 body: JSON.stringify(newUser)
             })
             if (!response.ok) {
-                throw new Error(`Szerverhiba: ${response.status}`);
+                const msg = await response.json();
+                console.log(msg.message);
+                throw new Error(`${msg.message}`);
             }
             setSuccess(true);
             setName('');
